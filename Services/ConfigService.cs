@@ -4,10 +4,16 @@ namespace HomeWork.Services
 {
     public class ConfigService
     {
-        public ConfigService()
+        static ConfigService()
+        {
+        }
+
+        private ConfigService()
         {
             Init();
         }
+
+        public static ConfigService Instance { get; } = new ConfigService();
 
         public Config Config { get; private set; }
 
@@ -15,8 +21,12 @@ namespace HomeWork.Services
         {
             Config = new Config
             {
-                BasketConfig = 10,
-                CurrencyConfig = Currency.Uah
+                BasketConfig = new BasketConfig { Limit = 10 },
+                CurrencyConfig = new CurrencyConfig
+                {
+                    Current = Currency.Uah,
+                    ExchangeRate = 27.2
+                }
             };
         }
     }

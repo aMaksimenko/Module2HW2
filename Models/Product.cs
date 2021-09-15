@@ -4,7 +4,7 @@ namespace HomeWork.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public int Price { get; init; }
+        public double Price { get; init; }
         public Currency Currency { get; set; }
     }
 }

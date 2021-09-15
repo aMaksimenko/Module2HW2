@@ -10,21 +10,22 @@ namespace HomeWork
         public void Run()
         {
             var productProvider = new ProductProvider();
-            var configService = new ConfigService();
             var userService = new UserService();
             var orderService = new OrderService();
             var notificationService = new NotificationService();
-            var randomProducts = PickRandomProducts(configService.Config.BasketConfig, productProvider.Products);
+            var randomProducts =
+                RandomProducts(ConfigService.Instance.Config.BasketConfig.Limit, productProvider.Products);
 
-            Basket.Instance.AddProducts(randomProducts);
-            orderService.FormOrder(Basket.Instance.Products);
-            notificationService.SendNotification(
-                userService.User,
-                orderService.Order,
-                configService.Config.CurrencyConfig);
+            foreach (var product in randomProducts)
+            {
+                Basket.Instance.Add(product);
+            }
+
+            orderService.Form(Basket.Instance.Products);
+            notificationService.SendNotification(userService.User, orderService.Order);
         }
 
-        private Product[] PickRandomProducts(int count, Product[] products)
+        private Product[] RandomProducts(int count, Product[] products)
         {
             var result = new Product[count];
             var random = new Random();

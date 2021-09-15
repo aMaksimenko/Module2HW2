@@ -4,6 +4,6 @@ namespace HomeWork.Models
     {
         public int Id { get; set; }
         public Product[] Products { get; set; }
-        public int TotalSum { get; set; }
+        public double TotalSum { get; set; }
     }
 }

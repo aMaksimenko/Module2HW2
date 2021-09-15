@@ -1,4 +1,3 @@
-using System;
 using HomeWork.Models;
 
 namespace HomeWork.Services
@@ -12,23 +11,19 @@ namespace HomeWork.Services
 
         public Order Order { get; private set; }
 
-        public void FormOrder(Product[] products)
+        public void Form(Product[] products)
         {
-            Order.Products = products;
             foreach (var product in products)
             {
                 Order.TotalSum += product.Price;
             }
+
+            Order.TotalSum *= ConfigService.Instance.Config.CurrencyConfig.ExchangeRate;
         }
 
         private void Init()
         {
-            var random = new Random();
-
-            Order = new Order
-            {
-                Id = random.Next(9999)
-            };
+            Order = new Order { Id = 1 };
         }
     }
 }

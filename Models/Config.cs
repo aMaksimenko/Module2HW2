@@ -2,7 +2,7 @@ namespace HomeWork.Models
 {
     public class Config
     {
-        public int BasketConfig { get; set; }
-        public Currency CurrencyConfig { get; set; }
+        public BasketConfig BasketConfig { get; init; }
+        public CurrencyConfig CurrencyConfig { get; init; }
     }
 }

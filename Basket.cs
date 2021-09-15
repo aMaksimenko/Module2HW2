@@ -1,11 +1,10 @@
 using HomeWork.Models;
+using HomeWork.Services;
 
 namespace HomeWork
 {
     public class Basket
     {
-        private static readonly Basket InstanceValue = new Basket();
-
         static Basket()
         {
         }
@@ -14,12 +13,22 @@ namespace HomeWork
         {
         }
 
-        public static Basket Instance => InstanceValue;
-        public Product[] Products { get; private set; }
+        public static Basket Instance { get; } = new Basket();
 
-        public void AddProducts(Product[] products)
+        public Product[] Products { get; private set; } =
+            new Product[ConfigService.Instance.Config.BasketConfig.Limit];
+
+        private int CurrentIndex { get; set; }
+
+        public void Add(Product product)
         {
-            Products = products;
+            Products[CurrentIndex] = product;
+            CurrentIndex++;
+        }
+
+        public void Clear()
+        {
+            Products = new Product[ConfigService.Instance.Config.BasketConfig.Limit];
         }
     }
 }

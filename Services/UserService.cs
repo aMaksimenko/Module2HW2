@@ -15,7 +15,7 @@ namespace HomeWork.Services
         {
             User = new User()
             {
-                FullName = "John Smith",
+                Name = "John",
                 Phone = "0505555050",
                 Email = "email@gmail.com"
             };
